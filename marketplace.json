@@ -1,0 +1,13 @@
+{
+  "name": "night-shift-marketplace",
+  "plugins": [
+    {
+      "name": "night-shift",
+      "source": "./",
+      "version": "0.1.0",
+      "description": "Overnight batch runner: queue tasks before bed, a declared auto-approval policy lets safe operations run unattended, anything risky parks with a reason, and a morning digest reports results. Never pushes, never auto-approves outside the policy.",
+      "displayName": "Night Shift",
+      "category": "productivity"
+    }
+  ]
+}

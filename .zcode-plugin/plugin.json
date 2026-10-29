@@ -1,0 +1,8 @@
+{
+  "name": "night-shift",
+  "version": "0.1.0",
+  "description": "Overnight batch runner: queue tasks before bed, a declared auto-approval policy lets safe operations (edits in allowed dirs, tests, linters, scratch-branch commits) run unattended, anything risky parks with a reason, and a morning digest reports what finished, parked, or failed. Never pushes, never auto-approves outside the policy.",
+  "author": { "name": "Roman's zcode agent" },
+  "skills": "./skills",
+  "commands": "./commands"
+}

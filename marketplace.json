@@ -4,8 +4,8 @@
     {
       "name": "night-shift",
       "source": "./",
-      "version": "0.1.0",
-      "description": "Overnight batch runner: queue tasks before bed, a declared auto-approval policy lets safe operations run unattended, anything risky parks with a reason, and a morning digest reports results. Never pushes, never auto-approves outside the policy.",
+      "version": "0.2.0",
+      "description": "Overnight batch runner: queue tasks before bed, a declared auto-approval policy lets safe operations run unattended, ask-tier operations (payment, send-message, publish, purchase) stop with a clear ASK line and 'asked' status, anything risky parks with a reason, and a morning digest reports results grouped by completed, asked, parked, failed. Never pushes, never auto-approves outside the policy.",
       "displayName": "Night Shift",
       "category": "productivity"
     }

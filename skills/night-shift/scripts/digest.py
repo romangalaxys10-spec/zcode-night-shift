@@ -36,23 +36,38 @@ def main():
                 t["reason"] = str(ev["reason"])
             if ev.get("summary"):
                 t["summary"] = str(ev["summary"])
-    counts = {"completed": 0, "parked": 0, "failed": 0, "queued": 0, "started": 0}
+    counts = {"completed": 0, "asked": 0, "parked": 0, "failed": 0, "queued": 0, "started": 0}
     for t in tasks.values():
         counts[t["status"]] = counts.get(t["status"], 0) + 1
-    order = {"failed": 0, "parked": 1, "completed": 2, "started": 3, "queued": 4}
+    order = {"failed": 0, "asked": 1, "parked": 2, "completed": 3, "started": 4, "queued": 5}
     rows = sorted(tasks.values(), key=lambda t: order.get(t["status"], 9))
     if a.format == "json":
         print(json.dumps({"counts": counts, "tasks": rows}, indent=2))
         return 0
     print("# Night shift digest\n")
-    print("%(completed)s completed, %(parked)s parked, %(failed)s failed.\n" % counts)
+    print("%(completed)s completed, %(asked)s asked, %(parked)s parked, %(failed)s failed.\n" % counts)
+    print("## Needs your call\n")
     for t in rows:
+        if t["status"] not in ("asked", "failed"):
+            continue
         line = "- **%s** %s" % (t["status"].upper(), t["id"])
         if t["summary"]:
             line += ": " + t["summary"]
         if t["reason"]:
             line += " (reason: %s)" % t["reason"]
         print(line)
+    print("\n## Rest of the run\n")
+    for t in rows:
+        if t["status"] in ("asked", "failed"):
+            continue
+        line = "- **%s** %s" % (t["status"].upper(), t["id"])
+        if t["summary"]:
+            line += ": " + t["summary"]
+        if t["reason"]:
+            line += " (reason: %s)" % t["reason"]
+        print(line)
+    if counts["asked"]:
+        print("\nAsked tasks stop at the operation and wait for your decision before it runs.")
     if counts["parked"] or counts["failed"]:
         print("\nParked and failed tasks need your call before any retry.")
     return 0
